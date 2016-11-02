@@ -1,0 +1,205 @@
+<template name="cliente" xmlns="http://www.w3.org/1999/html">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="" href="#"><img src="" alt="" /></a>
+            </div>
+
+
+        </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron bkg">
+        <div class="container">
+            <br/> <img src="images/blood.png" alt="Meteor" />
+
+            <h1>Bem vindo</h1>
+
+            <p>Esse software tem finalidade <b>Cadastro de Doadores</b> para alimentar uma base de dados</p>
+
+        </div>
+    </div>
+
+
+    <div class="container text-center">
+
+
+
+            <h1>Cadastro de Doador</h1><br/>
+
+<div class="row text-left">
+    <div class="col-xs-4">
+            <form class="cadastro ">
+
+                <input type="hidden" id="_id">
+
+                <div class="form-group">
+                    <label for="usr">Nome:</label>
+                    <input type="text" class="form-control" id="nome" required placeholder="Nome"/>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="usr">Sobrenome:</label>
+                    <input type="text" class="form-control" id="sobrenome" required placeholder="Sobrenome"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="usr">Email:</label>
+                    <input type="text" class="form-control" id="email" required placeholder="Email"/>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="usr">CPF:</label>
+                    <input type="text" class="form-control" id="cpf" required placeholder="Cpf"/>
+                </div>
+
+
+                <label class="sangue" for="tipoSangue">Tipo de Sangue</label>
+                <select class="tipoSangue form-control " data-style="btn-primary">
+
+
+                    <option>A +</option>
+                    <option>A -</option>
+                    <option>B +</option>
+                    <option>B -</option>
+                    <option>O +</option>
+                    <option>O -</option>
+                    <option>AB +</option>
+                    <option>AB -</option>
+
+                </select>
+
+                <label class="rede" for="tipoRede">Rede Social</label>
+                <select  class="tipoRede form-control" data-style="btn-primary">
+
+
+                    <option>Facebook</option>
+                    <option>Google +</option>
+                    <option>Instagram</option>
+                    <option>SnapChat</option>
+                    <option>WhastApp</option>
+
+
+                </select>
+
+
+                <div class="form-group">
+                    <label for="usr">Idade:</label>
+                    <input type="text" class="form-control" id="idade" required placeholder="Idade"/>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label" for="dataNascimento">Data de Nascimento</label>
+                    <input type="date" class="dataNascimento form-control"  >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="usr">CEP:</label>
+                    <input type="text" class="form-control" id="cep" required placeholder="Cep" />
+                </div>
+
+
+                <div class="form-group">
+                    <label for="usr">Rua:</label>
+                    <input type="text" class="form-control" id="rua" required placeholder="Rua"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="usr">Bairro:</label>
+                    <input type="text" class="form-control" id="bairro" required placeholder="Bairro"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="usr">Numero:</label>
+                    <input type="text" class="form-control" id="numero" required placeholder="Numero"/>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="usr">Cidade:</label>
+                    <input type="text" class="form-control" id="cidade" required placeholder="Numero"/>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="usr">Estado:</label>
+                    <input type="text" class="form-control" id="estado" required placeholder="Numero"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="usr">Codigo Ibge:</label>
+                    <input type="text" class="form-control" id="codigo" required placeholder="Numero"/>
+                </div>
+
+
+
+
+
+
+
+                <input type="submit" class="btn btn-primary btn-lg pull-right" value="Cadastrar"/>
+
+
+            </form>
+    </div>
+</div>
+
+
+        <div class="col-sm-12 col-md-12 col-lg-12">
+
+            <h1>Doadores Cadastrados</h1><br/>
+
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><b>NOME</b></th>
+                    <th><b>EMAIL</b></th>
+                    <th><b>TIPO DE SANGUE</b></th>
+
+                        <th><b>EDITAR</b></th>
+                        <th><b>EXCLUIR</b></th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                {{#each listaDoadores}}
+                    <tr>
+                        <td>{{nome}}</td>
+                        <td>{{email}}</td>
+                        <td>{{tipoSangue}}</td>
+
+                            <td>
+                                <button type="button" class="editar btn btn-success">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="excluir btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </td>
+
+                    </tr>
+                {{/each}}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</template>
