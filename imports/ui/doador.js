@@ -1,9 +1,13 @@
 import {Template} from 'meteor/templating';
 import {Doador} from '../api/doador.js'
+
 import '/public/css/site.css';
 import './doador.html';
 import './cep.js'
 
+Template.cliente.onCreated(function () {
+    Meteor.subscribe('listaDoadores');
+});
 
 Template.cliente.events({
 
@@ -29,7 +33,7 @@ Template.cliente.events({
     'click .editar'(){
 
         const doador = Doador.findOne({_id: this._id});
-        prepararEditar();},
+        prepararEditar(doador);},
 
     //---------------------------------------------------------------------
 
@@ -73,30 +77,13 @@ function Objeto() {
     const codigo = $('#codigo').val();
 
 
-    const doador = {
-        nome:nome,
-        sobrenome:sobrenome,
-        email:email,
-        pf:cpf,
-        tipoSangue:tipoSangue,
-        ipoRede:tipoRede,
-        idade:idade,
-        dataNascimento:dataNascimento,
-        cep:cep,
-        rua:rua,
-        bairro:bairro,
-        numero:numero,
-        cidade:cidade,
-        estado:estado,
-        codigo:codigo}
+    const doador = {nome, sobrenome, email, cpf, tipoSangue, tipoRede, idade, dataNascimento, cep, rua, bairro, numero, cidade, estado, codigo}
 
     return doador;
 }
 
 
-function prepararEditar() {
-
-    const doador = Objeto();
+function prepararEditar(doador) {
 
     $('#nome').val(doador.nome);
     $("#sobrenome").val(doador.sobrenome);

@@ -30,14 +30,14 @@
     </div>
 
 
-    <div class="container text-center">
 
 
+<div class="container">
 
-            <h1>Cadastro de Doador</h1><br/>
+            <h1 class="text-center">Cadastro de Doador</h1><br/>
 
-<div class="row text-left">
-    <div class="col-xs-4">
+<div class="row ">
+    <div class="col-xs-3">
             <form class="cadastro ">
 
                 <input type="hidden" id="_id">
@@ -65,8 +65,8 @@
                 </div>
 
 
-                <label class="sangue" for="tipoSangue">Tipo de Sangue</label>
-                <select class="tipoSangue form-control " data-style="btn-primary">
+                <label class="sangue control-label" for="tipoSangue">Tipo de Sangue</label>
+                <select class="tipoSangue form-control input-sm" data-style="btn-primary">
 
 
                     <option>A +</option>
@@ -80,7 +80,7 @@
 
                 </select>
 
-                <label class="rede" for="tipoRede">Rede Social</label>
+                <label class="rede control-label" for="tipoRede">Rede Social</label>
                 <select  class="tipoRede form-control" data-style="btn-primary">
 
 
@@ -95,7 +95,7 @@
 
 
                 <div class="form-group">
-                    <label for="usr">Idade:</label>
+                    <label for="usr" class="control-label">Idade:</label>
                     <input type="text" class="form-control" id="idade" required placeholder="Idade"/>
                 </div>
 
@@ -144,23 +144,33 @@
                     <input type="text" class="form-control" id="codigo" required placeholder="Numero"/>
                 </div>
 
-
-
-
-
-
-
                 <input type="submit" class="btn btn-primary btn-lg pull-right" value="Cadastrar"/>
 
 
             </form>
+        </div>
     </div>
 </div>
 
 
+        <br/>
+        <br/>
+
         <div class="col-sm-12 col-md-12 col-lg-12">
 
-            <h1>Doadores Cadastrados</h1><br/>
+            <h1 class="text-center
+
+
+
+
+
+
+
+
+
+
+
+">Doadores Cadastrados</h1><br/>
 
 
             <table class="table">
@@ -200,6 +210,6 @@
 
             </table>
         </div>
-    </div>
+
 
 </template>

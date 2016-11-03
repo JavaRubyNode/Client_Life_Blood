@@ -6,14 +6,14 @@ Meteor.methods({
 
     salvar(doadorObj){Doador.insert(doadorObj);},
     atualizar(id,doadorObj){alterarDados(id,doadorObj)},
-    apagar(){remover(id)}
+    apagar(id){remover(id)}
 
 });
 
 
 
 function alterarDados(id,doadorObj) {
-    Pessoa.update({_id:id}, {
+    Doador.update({_id:id}, {
         $set:{
             'nome':doadorObj.nome,
             'sobrenome':doadorObj.sobrenome,
