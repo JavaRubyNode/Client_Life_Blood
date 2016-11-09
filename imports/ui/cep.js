@@ -1,8 +1,6 @@
 
 
-    function limpa_formulário_cep() {
-        $('.cadastro').trigger("reset");
-    }
+    function limpa_formulário_cep() {$('.cadastro').trigger("reset");}
 
     //Quando o campo cep perde o foco.
     $("#cep").blur(function() {
@@ -31,9 +29,9 @@
 
                     if (!("erro" in dados)) {
                         //Atualiza os campos com os valores da consulta.
-                        $("#rua").val(dados.logradouro);
+                        $("#rua").val(dados.rua);
                         $("#bairro").val(dados.bairro);
-                        $("#cidade").val(dados.localidade);
+                        $("#cidade").val(dados.cidade);
                         $("#estado").val(dados.uf);
                         $("#codigo").val(dados.ibge);
                     } //end if.

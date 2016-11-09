@@ -1,62 +1,67 @@
 import {Template} from 'meteor/templating';
-import {Doador} from '../api/doador.js'
-
-import '/public/css/site.css';
+import {Doador} from '../api/doador.js';
+import  {Meteor} from 'meteor/meteor';
+import {Tracker} from 'meteor/tracker';
 import './doador.html';
-import './cep.js'
+import './cep.js';
+
+
+
 
 Template.cliente.onCreated(function () {
-    Meteor.subscribe('listaDoadores');
-});
-
-Template.cliente.events({
-
-    //--------------------ação do botão SALVAR-----------------------
-
-    "submit .cadastro": function(event){
-        event.preventDefault();
-
-        const id =  $('#_id').val();
-
-        if(id) {Meteor.call('atualizar',id,Objeto());}
-        else {Meteor.call('salvar', Objeto());}
-
-        limparCampos();
-    },
-
-    //------------------------------------------------------------------
 
 
-
-    // --------------------ação de editar do botao EDITAR---------------
-
-    'click .editar'(){
-
-        const doador = Doador.findOne({_id: this._id});
-        prepararEditar(doador);},
-
-    //---------------------------------------------------------------------
+    $(".dataNascimento").datepicker();
+    this.estadoDaTela = new ReactiveDict();
+    this.estadoDaTela.set('novo',false);
+    //this.lista = HTTP.get('http://localhost:8080/doador/');
 
 
-    //---------------------ação de excluir do botão EXCLUIR-----------------
+    Tracker.autorun(() => {
+        Meteor.subscribe('cadastroPorUsuario', Meteor.userId());
 
-    'click .excluir'(){Meteor.call('apagar',this._id);},
-
-    //----------------------------------------------------------------------
+    });
 });
 
 Template.cliente.helpers({
 
     isLogado() {return Meteor.userId();},
-    listaDoadores(){return Doador.find();}
+   listaDoadores(){return Template.instance().lista.get()},
+    mostrarForm(){return Template.instance().estadoDaTela.get('novo')}
+
+
 });
 
-    //------função para limpar campos usando JQuery-------------------------------
 
-     function limparCampos() {$('.cadastro').trigger("reset");}
+Template.cliente.events({
 
-   //------------------------------------------------------------------------------
+       'submit .cadastro': function(event,instance){
+        event.preventDefault();
+        const id =  $('#_id').val();
 
+        if(id) {Meteor.call('atualizar',id,Objeto());}
+        else {Meteor.call('salvar', Objeto());instanciar(false,instance)}
+
+        limparCampos();
+    },
+
+    'click .novo'(event,instance){instance.estadoDaTela.set('novo',true);Meteor.subscribe('listaDoadores',Meteor.userId());},
+
+    'click .js-cancelar-show-form'(event, instance){event.preventDefault();instanciar(false,instance)},
+
+    'click .editar'(){const doador = Doador.findOne({_id: this._id});prepararEditar(doador);},
+
+    'click .excluir'(){Meteor.call('apagar',this._id);},
+
+
+
+});
+
+function formatarData(doador) {return moment(doador.dataNascimento).format('DD/MM/YYYY');}
+
+function limparCampos() {$('.cadastro').trigger("reset");}
+
+function instanciar(tipo,instance) {instance.estadoDaTela.set('novo',tipo);}
 
 function Objeto() {
 
@@ -79,8 +84,7 @@ function Objeto() {
 
     const doador = {nome, sobrenome, email, cpf, tipoSangue, tipoRede, idade, dataNascimento, cep, rua, bairro, numero, cidade, estado, codigo}
 
-    return doador;
-}
+    return doador;}
 
 
 function prepararEditar(doador) {
@@ -100,6 +104,62 @@ function prepararEditar(doador) {
     $('#cidade').val(doador.cidade);
     $('#estado').val(doador.estado);
     $('#codigo').val(doador.codigo);
-    $('#_id').val(doador._id);
+    $('#_id').val(doador._id);}
+
+
+
+function pegarCep() {
+    //Quando o campo cep perde o foco.
+    $("#cep").blur(function() {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = $(this).val().replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                $("#rua").val("...");
+                $("#bairro").val("...");
+                $("#cidade").val("...");
+                $("#estado").val("...");
+                $("#codigo").val("...");
+
+                //Consulta o webservice viacep.com.br/
+                $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                    if (!("erro" in dados)) {
+                        //Atualiza os campos com os valores da consulta.
+                        $("#rua").val(dados.ruaD);
+                        $("#bairro").val(dados.bairroD);
+                        $("#cidade").val(dados.cidadeD);
+                        $("#estado").val(dados.ufD);
+                        $("#codigo").val(dados.ibgeD);
+                    } //end if.
+                    else {
+                        //CEP pesquisado não foi encontrado.
+                        limpa_formulário_cep();
+                        alert("CEP não encontrado.");
+                    }
+                });
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    });
 }
+
 
