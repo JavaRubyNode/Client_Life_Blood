@@ -1,0 +1,52 @@
+<template name="cliente" xmlns="http://www.w3.org/1999/html">
+
+    {{>navBar}}
+
+    {{#if isLogado}}
+
+
+     {{>logoDoador}}
+
+
+    <!-- Div para o botao novo Doador para funcao instance do template-->
+
+    <div class="botaoNovo text-center">
+        <button class="novo btn btn-primary" >Novo Doador</button>
+    </div>
+
+    <br/>
+    <br/>
+
+    {{#if mostrarForm}}
+
+
+
+            {{>cadastroDoador}}
+
+
+
+            <br/>
+            <br/>
+
+           {{>tabelaDoador }}
+
+        {{/if}}
+
+       {{else}}
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h2 class="text-center">Life BLood</h2>
+                {{>atForm}}
+            </div>
+        </div>
+
+
+    {{/if}}
+
+
+
+
+
+
+</template>

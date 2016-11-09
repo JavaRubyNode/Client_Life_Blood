@@ -1,1 +1,35 @@
-/* CSS declarations go here */
+.bkg {
+    background-color: #fefcf4 !important;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.novo{ margin-left: 3%; margin-top: 3% }
+
+
+.ficha{
+
+    border:1px solid #ccc;
+    background-color:#fefcf4;
+    margin-top: 2%;
+
+}
+
+.alinha-centro input {
+    width: 115px;
+    float: left;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 20px;
+}
+.alinha-centro {
+    width: 25%;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.botoes-acao {
+    width: 100%;
+    float: left;
+}
+

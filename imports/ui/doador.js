@@ -2,7 +2,7 @@ import {Template} from 'meteor/templating';
 import {Doador} from '../api/doador.js';
 import  {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
-import './doador.html';
+import './html/doador.html';
 import './cep.js';
 
 
@@ -26,7 +26,7 @@ Template.cliente.onCreated(function () {
 Template.cliente.helpers({
 
     isLogado() {return Meteor.userId();},
-   listaDoadores(){return Template.instance().lista.get()},
+    listaDoadores(){return Template.instance().lista.get()},
     mostrarForm(){return Template.instance().estadoDaTela.get('novo')}
 
 

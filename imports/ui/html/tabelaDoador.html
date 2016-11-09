@@ -1,0 +1,50 @@
+<template name="tabelaDoador">
+
+    <div class="col-sm-12 col-md-12 col-lg-12" id="listaAll">
+
+        <h1 class="text-center">Doadores Cadastrados</h1><br/>
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th><b>ID</b></th>
+                <th><b>NOME</b></th>
+                <th><b>EMAIL</b></th>
+                <th><b>TIPO DE SANGUE</b></th>
+
+                {{#if isLogado}}
+                    <th><b>EDITAR</b></th>
+                    <th><b>EXCLUIR</b></th>
+                {{/if}}
+            </tr>
+            </thead>
+
+            <tbody>
+            {{#each listaDoadores}}
+                <tr>
+
+                    <td>{{nome}}</td>
+                    <td>{{email}}</td>
+                    <td>{{tipoSangue}}</td>
+
+                    <td>
+                        <button type="button" class="editar btn btn-success">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="excluir btn btn-danger">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+
+                </tr>
+            {{/each}}
+            </tbody>
+
+        </table>
+    </div>
+
+
+</template>
