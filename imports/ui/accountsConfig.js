@@ -3,7 +3,7 @@ AccountsTemplates.configure({
 
   texts: {
     button: {
-      signIn: "Entrar no sistema",
+      signIn: "Entrar no Sistema ",
     },
     socialSignUp: "Register",
     socialIcons: {
@@ -11,7 +11,7 @@ AccountsTemplates.configure({
     },
     title: {
       forgotPwd: "Esqueceu a senha mesmo?",
-      signIn: "Informe o login",
+      signIn: "Faça o Login no Sistema",
       signUp: "Sign Up Title"
     },
   },
