@@ -2,8 +2,10 @@ import {Template} from 'meteor/templating';
 import {Doador} from '../api/doador.js';
 import  {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
+
 import './html/doador.html';
 import './cep.js';
+
 
 
 
@@ -14,6 +16,7 @@ Template.cliente.onCreated(function () {
     $(".dataNascimento").datepicker();
     this.estadoDaTela = new ReactiveDict();
     this.estadoDaTela.set('novo',false);
+
     //this.lista = HTTP.get('http://localhost:8080/doador/');
 
 
@@ -27,7 +30,8 @@ Template.cliente.helpers({
 
     isLogado() {return Meteor.userId();},
     listaDoadores(){return Template.instance().lista.get()},
-    mostrarForm(){return Template.instance().estadoDaTela.get('novo')}
+    mostrarForm(){return Template.instance().estadoDaTela.get('novo')},
+
 
 
 });
@@ -39,13 +43,31 @@ Template.cliente.events({
         event.preventDefault();
         const id =  $('#_id').val();
 
-        if(id) {Meteor.call('atualizar',id,Objeto());}
-        else {Meteor.call('salvar', Objeto());instanciar(false,instance)}
+        if(id) {
+            Meteor.call('atualizar',id,Objeto());
+        }
+        else {
+            Meteor.call('salvar', Objeto(),function (error,response) {
+                if(error) {
+                    //instance.estadoDaTela.set('mensagemErro', error.reason);
+                } else {
+                    instanciar(false,instance);
+                    //instance.estadoDaTela.set('mensagemErro', null);
+                    //instance.estadoDaTela.set('mensagemSucesso', 'Criado com sucesso!');
+                    limparCampos();
+                }
+            });
 
-        limparCampos();
+        }
+
+
     },
 
-    'click .novo'(event,instance){instance.estadoDaTela.set('novo',true);Meteor.subscribe('listaDoadores',Meteor.userId());},
+    'click .novo'(event,instance){
+        instance.estadoDaTela.set('novo',true);
+        Meteor.subscribe('listaDoadores',Meteor.userId());
+        rolarTela();
+    },
 
     'click .js-cancelar-show-form'(event, instance){event.preventDefault();instanciar(false,instance)},
 
@@ -56,6 +78,14 @@ Template.cliente.events({
 
 
 });
+
+function rolarTela() {
+$('.novo').click(function (event)     {
+   const elemento = $(this).attr('href');
+    const deslocamento = $(elemento).offset().top;
+    $('html ,body').animate({scrollTop:deslocamento},'slow')
+});
+}
 
 function formatarData(doador) {return moment(doador.dataNascimento).format('DD/MM/YYYY');}
 
