@@ -1,24 +1,22 @@
 import {Template} from 'meteor/templating';
 import {Doador} from '../api/doador.js';
-import  {Meteor} from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
-
 import './html/doador.html';
-import './cep.js';
 
-
-
+Template.cliente.rendered=function () {
+    $(".dataNascimento").datepicker({
+        format:'mm/dd/yyyy'
+    });
+}
 
 
 Template.cliente.onCreated(function () {
 
-
-    $(".dataNascimento").datepicker();
     this.estadoDaTela = new ReactiveDict();
     this.estadoDaTela.set('novo',false);
 
-    //this.lista = HTTP.get('http://localhost:8080/doador/');
-
+    //this.lista = Meteor.http.call('GET','http://localhost:8080/doador/');
 
     Tracker.autorun(() => {
         Meteor.subscribe('cadastroPorUsuario', Meteor.userId());
@@ -29,7 +27,7 @@ Template.cliente.onCreated(function () {
 Template.cliente.helpers({
 
     isLogado() {return Meteor.userId();},
-    listaDoadores(){return Template.instance().lista.get()},
+    listaDoadores(){return Template.instance().lista},
     mostrarForm(){return Template.instance().estadoDaTela.get('novo')},
 
 
@@ -63,11 +61,7 @@ Template.cliente.events({
 
     },
 
-    'click .novo'(event,instance){
-        instance.estadoDaTela.set('novo',true);
-        Meteor.subscribe('listaDoadores',Meteor.userId());
-        rolarTela();
-    },
+    'click .novo'(event,instance){instance.estadoDaTela.set('novo',true);Meteor.subscribe('listaDoadores',Meteor.userId());rolarTela();},
 
     'click .js-cancelar-show-form'(event, instance){event.preventDefault();instanciar(false,instance)},
 
@@ -80,12 +74,32 @@ Template.cliente.events({
 });
 
 function rolarTela() {
-$('.novo').click(function (event)     {
-   const elemento = $(this).attr('href');
-    const deslocamento = $(elemento).offset().top;
-    $('html ,body').animate({scrollTop:deslocamento},'slow')
-});
+    $('.novo').click(function (event){
+        const elemento = $(this).attr('href');
+        const deslocamento = $(elemento).offset().top;
+        $('html ,body').animate({scrollTop:deslocamento},'slow')
+    });
 }
+
+function pegarCep() {
+    $('#cep').blur(function () {
+
+
+    const tempCep = $('#cep').val();
+    $.getJSON(`http://api.postmon.com.br/v1/cep/`+{tempCep},function (dados) {
+        if (!("erro" in dados)) {
+            //Atualiza os campos com os valores da consulta.
+            $("#rua").val(dados.logradouro);
+            $("#bairro").val(dados.bairro);
+            $("#cidade").val(dados.cidade);
+            $("#uf").val(dados.estado);
+            $("#ibge").val(dados.cidade_info.codigo_ibge);
+        } //end if.
+    });
+
+    });
+}
+
 
 function formatarData(doador) {return moment(doador.dataNascimento).format('DD/MM/YYYY');}
 
@@ -136,60 +150,5 @@ function prepararEditar(doador) {
     $('#codigo').val(doador.codigo);
     $('#_id').val(doador._id);}
 
-
-
-function pegarCep() {
-    //Quando o campo cep perde o foco.
-    $("#cep").blur(function() {
-
-        //Nova variável "cep" somente com dígitos.
-        var cep = $(this).val().replace(/\D/g, '');
-
-        //Verifica se campo cep possui valor informado.
-        if (cep != "") {
-
-            //Expressão regular para validar o CEP.
-            var validacep = /^[0-9]{8}$/;
-
-            //Valida o formato do CEP.
-            if(validacep.test(cep)) {
-
-                //Preenche os campos com "..." enquanto consulta webservice.
-                $("#rua").val("...");
-                $("#bairro").val("...");
-                $("#cidade").val("...");
-                $("#estado").val("...");
-                $("#codigo").val("...");
-
-                //Consulta o webservice viacep.com.br/
-                $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
-
-                    if (!("erro" in dados)) {
-                        //Atualiza os campos com os valores da consulta.
-                        $("#rua").val(dados.ruaD);
-                        $("#bairro").val(dados.bairroD);
-                        $("#cidade").val(dados.cidadeD);
-                        $("#estado").val(dados.ufD);
-                        $("#codigo").val(dados.ibgeD);
-                    } //end if.
-                    else {
-                        //CEP pesquisado não foi encontrado.
-                        limpa_formulário_cep();
-                        alert("CEP não encontrado.");
-                    }
-                });
-            } //end if.
-            else {
-                //cep é inválido.
-                limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
-            }
-        } //end if.
-        else {
-            //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
-        }
-    });
-}
 
 
