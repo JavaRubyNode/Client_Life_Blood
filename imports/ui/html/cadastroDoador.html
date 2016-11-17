@@ -8,28 +8,28 @@
 
             <form class="cadastro">
                 <div class="col-xs-3">
-                    <input type="hidden" id="_id">
+                    <input type="hidden" id="_id" value="{{doador.id}}">
 
                     <div class="form-group">
                         <label for="usr">Nome:</label>
-                        <input type="text" class="form-control" id="nome" required placeholder="Nome"/>
+                        <input type="text" class="form-control" id="nome" value="{{doador.nome}}" required placeholder="Nome"/>
                     </div>
 
 
                     <div class="form-group">
                         <label for="usr">Sobrenome:</label>
-                        <input type="text" class="form-control" id="sobrenome" required placeholder="Sobrenome"/>
+                        <input type="text" class="form-control" id="sobrenome" value="{{doador.sobrenome}}" required placeholder="Sobrenome"/>
                     </div>
 
                     <div class="form-group">
                         <label for="usr">Email:</label>
-                        <input type="text" class="form-control" id="email" required placeholder="Email"/>
+                        <input type="text" class="form-control" id="email" value="{{doador.email}}" required placeholder="Email"/>
                     </div>
 
 
                     <div class="form-group">
                         <label for="usr">CPF:</label>
-                        <input type="text" class="form-control" id="cpf" required placeholder="Cpf"/>
+                        <input type="text" class="form-control" id="cpf" value="{{doador.cpf}}" required placeholder="Cpf"/>
                     </div>
                 </div>
 
@@ -41,13 +41,13 @@
 
                     <div class="form-group">
                         <label for="usr" class="control-label">Idade:</label>
-                        <input type="text" class="form-control" id="idade" required placeholder="Idade"/>
+                        <input type="text" class="form-control" id="idade" value="{{doador.idade}}" required placeholder="Idade"/>
                     </div>
 
 
                     <div class="form-group">
                         <label class="control-label" for="dataNascimento">Data de Nascimento</label>
-                        <input type="date" class="dataNascimento form-control" >
+                        <input type="date" class="dataNascimento form-control" value="{{doador.dataNascimento}}">
                     </div>
                 </div>
 
@@ -56,23 +56,23 @@
 
                     <div class="form-group">
                         <label for="usr">CEP:</label>
-                        <input type="text" class="form-control" id="cep" required placeholder="Cep" />
+                        <input type="text" class="form-control" id="cep" value="{{doador.cep}}" required placeholder="Cep" />
                     </div>
 
 
                     <div class="form-group">
                         <label for="usr">Rua:</label>
-                        <input type="text" class="form-control" id="rua" required placeholder="Rua"/>
+                        <input type="text" class="form-control" id="rua" value="{{doador.rua}}" required placeholder="Rua"/>
                     </div>
 
                     <div class="form-group">
                         <label for="usr">Bairro:</label>
-                        <input type="text" class="form-control" id="bairro" required placeholder="Bairro"/>
+                        <input type="text" class="form-control" id="bairro" value="{{doador.bairro}}" required placeholder="Bairro"/>
                     </div>
 
                     <div class="form-group">
                         <label for="usr">Numero:</label>
-                        <input type="text" class="form-control" id="numero" required placeholder="Numero"/>
+                        <input type="text" class="form-control" id="numero" value="{{doador.numero}}" required placeholder="Numero"/>
                     </div>
 
                 </div>
@@ -81,18 +81,18 @@
 
                     <div class="form-group">
                         <label for="usr">Cidade:</label>
-                        <input type="text" class="form-control" id="cidade" required placeholder="Numero"/>
+                        <input type="text" class="form-control" id="cidade" value="{{doador.cidade}}" required placeholder="Numero"/>
                     </div>
 
 
                     <div class="form-group">
                         <label for="usr">Estado:</label>
-                        <input type="text" class="form-control" id="estado" required placeholder="Numero"/>
+                        <input type="text" class="form-control" id="estado" value="{{doador.estado}}" required placeholder="Numero"/>
                     </div>
 
                     <div class="form-group">
                         <label for="usr">Codigo Ibge:</label>
-                        <input type="text" class="form-control" id="codigo" required placeholder="Numero"/>
+                        <input type="text" class="form-control" id="codigo" value="{{doador.codigoIbge}}" required placeholder="Numero"/>
                     </div>
                 </div>
                 <div class="botoes-acao">
