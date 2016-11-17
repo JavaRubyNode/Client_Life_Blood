@@ -1,41 +1,45 @@
 import {Meteor} from 'meteor/meteor';
-import {Doador} from './doador.js';
-import {check} from 'meteor/check';
-
+import { HTTP } from 'meteor/http';
 
 Meteor.methods({
 
-    salvar(doadorObj){Doador.insert(doadorObj);},
-    atualizar(id,doadorObj){alterarDados(id,doadorObj)},
-    apagar(id){remover(id)},
+    salvar(doador){inserirDoadorRest(doador)},
+    atualizar(doador){atualizarDoadorRest(doador)},
+    apagar(id){removerDoadorRest(id)},
+    buscarDoacaoRest() {if(Meteor.isServer) {this.unblock();const URL = "http://localhost:8080/doador/";return Meteor.wrapAsync(restCall)(URL);}}
 
 
 });
 
 
+const restCall = function(URL, callback) {try {const result = HTTP.get(URL);callback(null, result.data.data);} catch(e) {console.log(e);callback(500, 'Erro ao acessar API');}};
 
-function alterarDados(id,doadorObj) {
-    Doador.update({_id:id}, {
-        $set:{
-            'nome':doadorObj.nome,
-            'sobrenome':doadorObj.sobrenome,
-            'email':doadorObj.email,
-            'cpf':doadorObj.cpf,
-            'tipoSangue':doadorObj.tipoSangue,
-            'tipoRede':doadorObj.tipoRede,
-            'idade':doadorObj.idade,
-            'dataNascimento':doadorObj.dataNascimento,
-            'cep':doadorObj.cep,
-            'rua':doadorObj.rua,
-            'bairro':doadorObj.bairro,
-            'numero':doadorObj.numero,
-            'cidade':doadorObj.cidade,
-            'estado':doadorObj.estado,
-            'codigo':doadorObj.codigo
-        }
-    })}
+function removerDoadorRest(id) {
+    if(Meteor.isServer) {
+        try {
+            const URL = `http://localhost:8080/doador/${id}`;
+            HTTP.del(URL, function (error, response) {if (error) {console.log(error);} else {console.log(response);}});
+        } catch (e) {console.log(e);}
+    }
+}
 
+function inserirDoadorRest(doador) {
+    if(Meteor.isServer) {
+        try {
+            const URL = `http://localhost:8080/doador/`;
+            HTTP.post(URL, {data: doador}, function (error, response) {
+                if (error) {console.log(error);} else {console.log(response);}});
+        } catch (e) {console.log(e);}
+    }
+}
 
 
-function remover(id) {Doador.remove({_id:id});}
-
+function atualizarDoadorRest(doador){
+    if(Meteor.isServer) {
+        try {
+            const URL = `http://localhost:8080/doador/${doador.id}`;
+            HTTP.put(URL, {data: doador}, function (error, response) {
+                if (error) {console.log(error);}else {console.log(response);}});
+        } catch (e) {console.log(e);}
+    }
+}
