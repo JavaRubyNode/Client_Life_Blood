@@ -12,7 +12,7 @@ Meteor.methods({
 });
 
 
-const restCall = function(URL, callback) {try {const result = HTTP.get(URL);callback(null, result.data.data);} catch(e) {console.log(e);callback(500, 'Erro ao acessar API');}};
+const restCall = function(URL, callback) {try {const result = HTTP.get(URL);callback(null, result.data);} catch(e) {console.log(e);callback(500, 'Erro ao acessar API');}};
 
 function removerDoadorRest(id) {
     if(Meteor.isServer) {

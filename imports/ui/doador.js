@@ -16,9 +16,11 @@ Template.cliente.onCreated(function () {
     this.estadoDaTela = new ReactiveDict();
     this.estadoDaTela.set('novo',false);
     this.estadoDaTela.set('ObjDoador',null);
-    this.estadoDaTela.set('listDoadores',null);
+    this.estadoDaTela.set('GetlistDoadores',null);
 
     buscarDoacao(this);
+
+
 
 
     Tracker.autorun(() => {
@@ -30,7 +32,7 @@ Template.cliente.onCreated(function () {
 Template.cliente.helpers({
 
     isLogado() {return Meteor.userId();},
-    listaDoadores(){return Template.instance().estadoDaTela.get('listDoadores')},
+    listaDoadores(){return Template.instance().estadoDaTela.get('GetlistDoadores')},
     mostrarForm(){return Template.instance().estadoDaTela.get('novo')},
     doador(){return Template.instance().estadoDaTela.get('ObjDoador')}
 
@@ -75,7 +77,7 @@ Template.cliente.events({
 
     },
 
-    'click .novo'(event,instance){instance.estadoDaTela.set('novo',true);Meteor.subscribe('listaDoadores',Meteor.userId());rolarTela();},
+    'click .novo'(event,instance){instance.estadoDaTela.set('novo',true);rolarTela();},
 
     'click .js-cancelar-show-form'(event, instance){event.preventDefault();instanciar(false,instance)},
 
@@ -87,9 +89,11 @@ Template.cliente.events({
 
 });
 
-function buscarDoacao(instance) {Meteor.call('buscarDoacaoRest',(error,response)=>{if(error){console.log(error)}else{instance.estadoDaTela.set('GetListaDoador',response)}});}
+function buscarDoacao(instance) {Meteor.call('buscarDoacaoRest',(error,response)=>{if(error){console.log(error)}else{instance.estadoDaTela.set('GetlistDoadores',response)}});}
 
-function rolarTela() {$('.novo').click(function (event){const elemento = $(this).attr('href');const deslocamento = $(elemento).offset().top;$('html ,body').animate({scrollTop:deslocamento},'slow')});}
+function rolarTela() {$('.novo').click(function (event){const elemento = $(this).attr('href');
+
+const deslocamento = $(elemento).offset().top;$('html ,body').animate({scrollTop:deslocamento},'slow')});}
 
 function formatarData(doador) {return moment(doador.dataNascimento).format('DD/MM/YYYY');}
 
