@@ -12,7 +12,16 @@ Meteor.methods({
 });
 
 
-const restCall = function(URL, callback) {try {const result = HTTP.get(URL);callback(null, result.data);} catch(e) {console.log(e);callback(500, 'Erro ao acessar API');}};
+const restCall = function(URL, callback) {
+    try {
+        const result = HTTP.get(URL);
+
+        callback(null, result.data);
+    }
+        catch(e) {
+        console.log(e);callback(500, 'Erro ao acessar API');
+    }
+};
 
 function removerDoadorRest(id) {
     if(Meteor.isServer) {
@@ -36,6 +45,7 @@ function inserirDoadorRest(doador) {
 
 function atualizarDoadorRest(doador){
     if(Meteor.isServer) {
+
         try {
             const URL = `http://localhost:8080/doador/${doador.id}`;
             HTTP.put(URL, {data: doador}, function (error, response) {

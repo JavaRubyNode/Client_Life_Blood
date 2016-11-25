@@ -1,13 +1,48 @@
-<template name="cliente" xmlns="http://www.w3.org/1999/html">
+<template name="cliente" >
 
     {{#if isLogado}}
 
-    {{>navBar}}
+
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Life Blood</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="" target="">Doação</a></li>
+                            {{#if isLogado}}
+                                <li><a href="#" class="js-sair">Sair</a></li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
 
 
 
-     {{>logoDoador}}
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron bkg">
+            <div class="container">
+                <br/>
+                <br/><img src="images/blood.png" alt="Meteor" class="row"/>
+                <h1>Bem vindo</h1>
+                <p>Esse software tem finalidade <b>Cadastro de Doadores</b> para alimentar uma base de dados</p>
+
+            </div>
+        </div>
 
 
     <!-- Div para o botao novo Doador para funcao instance do template-->
@@ -23,7 +58,142 @@
 
 
 
-            {{>cadastroDoador}}
+        <div class="ficha container">
+
+            <h1 class="text-center">Cadastro de Doador</h1><br/>
+
+            <div class="row ">
+
+                <form class="cadastro">
+                    <div class="col-xs-3">
+                        <input type="hidden" id="_id" value="{{doador.id}}">
+
+                        <div class="form-group">
+                            <label for="usr">Nome:</label>
+                            <input type="text" class="form-control" id="nome" value="{{doador.nome}}" required placeholder="Nome"/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="usr">Sobrenome:</label>
+                            <input type="text" class="form-control" id="sobrenome" value="{{doador.sobrenome}}" required placeholder="Sobrenome"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="usr">Email:</label>
+                            <input type="text" class="form-control" id="email" value="{{doador.email}}" required placeholder="Email"/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="usr">CPF:</label>
+                            <input type="text" class="form-control" id="cpf" value="{{doador.cpf}}" required placeholder="Cpf"/>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3">
+
+                        <div class="form-group">
+                            <label class="sangue control-label" for="tipoSangue">Tipo de Sangue</label>
+                            <select class="tipoSangue form-control input-sm" data-style="btn-primary" id="combox_sangue" value="{{doador.tipoSanguineo}}">
+
+
+                                <option>A +</option>
+                                <option>A -</option>
+                                <option>B +</option>
+                                <option>B -</option>
+                                <option>O +</option>
+                                <option>O -</option>
+                                <option>AB +</option>
+                                <option>AB -</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="rede control-label" for="tipoRede">Rede Social</label>
+                            <select  class="tipoRede form-control" data-style="btn-primary" id="combox_rede" value="{{doador.redeSocial}}">
+
+
+                                <option>Facebook</option>
+                                <option>Google +</option>
+                                <option>Instagram</option>
+                                <option>SnapChat</option>
+                                <option>WhastApp</option>
+
+
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="usr" class="control-label">Idade:</label>
+                            <input type="text" class="form-control" id="idade" value="{{doador.idade}}" required placeholder="Idade"/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label" for="dataNascimento">Data de Nascimento</label>
+                            <input type="text" class="dataNascimento form-control" value="{{doador.dataNascimento}}">
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-3">
+
+                        <div class="form-group">
+                            <label for="usr">CEP:</label>
+                            <input type="text" class="form-control" id="cep" value="{{doador.cep}}" required placeholder="Cep" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="usr">Rua:</label>
+                            <input type="text" class="form-control" id="rua" value="{{doador.rua}}" required placeholder="Rua"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="usr">Bairro:</label>
+                            <input type="text" class="form-control" id="bairro" value="{{doador.bairro}}" required placeholder="Bairro"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="usr">Numero:</label>
+                            <input type="text" class="form-control" id="numero" value="{{doador.numero}}" required placeholder="Numero"/>
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-3">
+
+                        <div class="form-group">
+                            <label for="usr">Cidade:</label>
+                            <input type="text" class="form-control" id="cidade" value="{{doador.cidade}}" required placeholder="Cidade"/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="usr">Estado:</label>
+                            <input type="text" class="form-control" id="estado" value="{{doador.estado}}" required placeholder="Estado"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="usr">Codigo Ibge:</label>
+                            <input type="text" class="form-control" id="codigo" value="{{doador.codigoIbge}}" required placeholder="CodigoIbge"/>
+                        </div>
+                    </div>
+
+                    <div class="botoes-acao">
+                        <div class="alinha-centro">
+                            <input type="submit" class="btn btn-primary btn-lg pull-right" value="Cadastrar"/>
+
+                            <input class="js-cancelar-show-form btn btn-danger btn-lg pull-right col-xs-5" value="Cancelar"/>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
 
 
 
@@ -32,9 +202,55 @@
             <br/>
             <br/>
 
-           {{>tabelaDoador }}
 
-        {{/if}}
+        <div class="col-sm-12 col-md-12 col-lg-12" id="listaAll">
+
+            <h1 class="text-center">Doadores Cadastrados</h1><br/>
+
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><b>ID</b></th>
+                    <th><b>NOME</b></th>
+                    <th><b>EMAIL</b></th>
+                    <th><b>IDADE</b></th>
+
+                    {{#if isLogado}}
+                        <th><b>EDITAR</b></th>
+                        <th><b>EXCLUIR</b></th>
+                    {{/if}}
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {{#each listDoadores}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{nome}}</td>
+                        <td>{{email}}</td>
+                        <td>{{idade}}</td>
+
+                        <td>
+                            <button type="button" class="editar btn btn-success">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="excluir btn btn-danger">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+
+                    </tr>
+                {{/each}}
+                </tbody>
+
+            </table>
+        </div>
+
+    {{/if}}
 
        {{else}}
 
@@ -46,7 +262,9 @@
         </div>
 
 
+
     {{/if}}
+
 
 
 

@@ -1,15 +1,9 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-
+import {Meteor} from 'meteor/meteor';
 
 import './main.html';
 import '../imports/ui/doador.js';
-import '../imports/ui/html/comboSangue.html';
-import '../imports/ui/html/comboRede.html';
-import '../imports/ui/html/navBar.html';
-import '../imports/ui/html/logoDoador.html';
-import '../imports/ui/html/cadastroDoador.html';
-import '../imports/ui/html/tabelaDoador.html';
 import '../imports/ui/accountsConfig.js';
 
 
