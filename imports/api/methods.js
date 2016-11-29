@@ -36,6 +36,7 @@ function inserirDoadorRest(doador) {
     if(Meteor.isServer) {
         try {
             const URL = `http://localhost:8080/doador/`;
+            console.log(doador);
             HTTP.post(URL, {data: doador}, function (error, response) {
                 if (error) {console.log(error);} else {console.log(response);}});
         } catch (e) {console.log(e);}
