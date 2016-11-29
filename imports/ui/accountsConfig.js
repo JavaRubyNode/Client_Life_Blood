@@ -12,7 +12,7 @@ AccountsTemplates.configure({
     title: {
       forgotPwd: "Esqueceu a senha mesmo?",
       signIn: "Faça o Login no Sistema",
-      signUp: "Sign Up Title"
+      signUp: "Criar conta de Usuario"
     },
   },
 });
