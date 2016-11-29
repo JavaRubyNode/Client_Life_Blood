@@ -2,14 +2,9 @@ import {Template} from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
+
 import './html/doador.html';
 
-Template.cliente.rendered=function () {
-    $(".dataNascimento").datepicker({
-        format:'mm/dd/yyyy'
-    });
-
-}
 
 
 Template.cliente.onCreated(function () {
@@ -20,6 +15,10 @@ Template.cliente.onCreated(function () {
     this.estadoDaTela.set('GetlistDoadores',null);
 
     buscarDoacao(this);
+
+
+
+
 
     Tracker.autorun(() => {
         Meteor.subscribe('cadastroPorUsuario', Meteor.userId());
@@ -54,6 +53,7 @@ Template.cliente.events({
                 if(error) {
                     //instance.estadoDaTela.set('mensagemErro', error.reason);
                 } else {
+                    console.log(Objeto());
                     instanciar(false,instance);
                     limparCampos();
                     buscarDoacao(instance);
@@ -91,7 +91,7 @@ Template.cliente.events({
 
 Template.cliente.helpers({
 
-    isLogado() {return Meteor.userId();},
+
     listDoadores(){return Template.instance().estadoDaTela.get('GetlistDoadores');},
     mostrarForm(){return Template.instance().estadoDaTela.get('novo')},
     doador(){return Template.instance().estadoDaTela.get('ObjDoador')}
@@ -113,9 +113,11 @@ function buscarDoacao(instance) {
 }
 
 
-function formatarData(doador) {
-    return moment(doador.dataNascimento).format('DD/MM/YYYY');
-}
+
+
+
+
+
 
 function limparCampos() {
     $('.cadastro').trigger("reset");
@@ -133,8 +135,8 @@ function Objeto() {
     const sobrenome = $("#sobrenome").val();
     const email = $('#email').val();
     const cpf = $('#cpf').val();
-    const tipoSangue =$('#combox_sangue').val();
-    const tipoRede = $('#combox_rede').val();
+    const tipoSangue =$('.tipoSangue').val();
+    const tipoRede = $('.tipoRede').val();
     const idade = $('#idade').val();
     const dataNascimento = $('.dataNascimento').val();
     const cep = $('#cep').val();
@@ -158,8 +160,8 @@ function setDoadorRest(doador) {
     doador.sobrenome = $("#sobrenome").val();
     doador.email = $('#email').val();
     doador.cpf = $('#cpf').val();
-    doador.tipoSangue =$('#combox_sangue').val();
-    doador.tipoRede = $('#combox_rede').val();
+    doador.tipoSangue =$('.tipoSangue').val();
+    doador.tipoRede = $('.tipoRede').val();
     doador.idade = $('#idade').val();
     doador.dataNascimento = $('.dataNascimento').val();
     doador.cep = $('#cep').val();
