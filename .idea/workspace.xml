@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b49e909f-a026-48fa-9285-f76e9931a4e4" name="Default" comment="correção de metodos">
+    <list default="true" id="b49e909f-a026-48fa-9285-f76e9931a4e4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Client_Life_Blood.iws" />
@@ -435,7 +435,7 @@
       <workItem from="1480108602854" duration="3148000" />
       <workItem from="1480179468945" duration="616000" />
       <workItem from="1480366349435" duration="1353000" />
-      <workItem from="1480444435927" duration="2983000" />
+      <workItem from="1480444435927" duration="2992000" />
     </task>
     <task id="LOCAL-00001" summary="arquivos da IDE Web Storm">
       <created>1478711872418</created>
@@ -514,11 +514,18 @@
       <option name="project" value="LOCAL" />
       <updated>1480447477825</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="correção de metodos">
+      <created>1480447486919</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1480447486919</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150052000" />
+    <option name="totallyTimeSpent" value="150061000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="720" extended-state="0" />
